@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import requests
 import shutil
+from txt_dictbe import txt2dict
 # import <erik része>
 
 bot = commands.Bot(command_prefix='$')
@@ -28,6 +29,7 @@ async def adjhozza(ctx):
             r.raw.decode_content = True
             with open(f"{ctx.message.author}.txt", 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
+        txt2dict(f"{ctx.message.author}.txt", ctx.message.author)
         await ctx.message.add_reaction('✅')
         print("KÉSZ")
 
