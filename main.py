@@ -46,4 +46,6 @@ async def szabad(ctx):
     e.set_footer(text="faszom")
     await ctx.send(embed=e)
 
-bot.run('Njg5NTIzNTI5MzI2MTMzMzM2.XnEG1A.zxoCiiiB4H5uV6vr86Nl52cUkL0')
+with open("token.txt") as f:
+    token = read(f).rstrip()
+bot.run(token)
