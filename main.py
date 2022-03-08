@@ -18,12 +18,17 @@ async def on_ready():
 async def adjhozza(ctx):
     if len(ctx.message.attachments) == 0:
         await ctx.send("Nem csatoltál semmit")
+        await ctx.message.add_reaction('❌')
+    elif not ctx.message.attachments[0].filename.endswith('.txt'):
+        await ctx.send("Ez nem txt")
+        await ctx.message.add_reaction('❌')
     else:
         r = requests.get(ctx.message.attachments[0].url, stream=True)
         if r.status_code == 200:
             r.raw.decode_content = True
-            with open("woo.txt", 'wb') as f:
+            with open(f"{ctx.message.author}.txt", 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
+        await ctx.message.add_reaction('✅')
         print("KÉSZ")
 
 
@@ -47,5 +52,5 @@ async def szabad(ctx):
     await ctx.send(embed=e)
 
 with open("token.txt") as f:
-    token = read(f).rstrip()
+    token = f.read().rstrip()
 bot.run(token)
