@@ -32,7 +32,6 @@ def txt2dict(file_nev, nev, json_paros="paros_het.json", json_paratlan="paratlan
             case "Páros":
                 d_paros[nev][data[0]].append(
                     (int(data[1])*60+int(data[2]), int(data[3])*60+int(data[4])))
-    print(d_paratlan, d_paros)
     with open(json_paros, 'w') as f:
         json.dump(d_paros, f)
     with open(json_paratlan, 'w') as f:
