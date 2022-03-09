@@ -4,6 +4,8 @@ from discord.ext import commands
 import requests
 import shutil
 from txt_dictbe import txt2dict
+import os
+dirname = os.path.dirname(__file__)
 # import <erik része>
 
 bot = commands.Bot(command_prefix='$')
@@ -27,9 +29,11 @@ async def adjhozza(ctx):
         r = requests.get(ctx.message.attachments[0].url, stream=True)
         if r.status_code == 200:
             r.raw.decode_content = True
-            with open(f"{ctx.message.author}.txt", 'wb') as f:
+            fajlnev = os.path.join(
+                dirname, f"orarendek/{ctx.message.author}.txt")
+            with open(fajlnev, 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
-        txt2dict(f"{ctx.message.author}.txt", ctx.message.author)
+        txt2dict(fajlnev, f"{ctx.message.author}")
         await ctx.message.add_reaction('✅')
         print("KÉSZ")
 
