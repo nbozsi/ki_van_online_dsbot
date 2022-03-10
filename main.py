@@ -4,7 +4,7 @@ from discord.ext import commands
 from discord.utils import get
 import requests
 import shutil
-from txt_dictbe import txt2dict
+from txt_dictbe import txt2dict, kategoriak
 import os
 dirname = os.path.dirname(__file__)
 
@@ -41,23 +41,24 @@ async def adjhozza(ctx):
 
 @bot.command()
 async def szabad(ctx):
-    for member in ctx.guild.members:
-        print(member)
-    z, s, p = (["Erik", "Boldi"], ["Broga", "VeresG"], ["sanyimester"])
+    z, s, p = kategoriak(ctx.guild.members)
     e = discord.Embed(
         title="Mi a fasz van",
         color=discord.Color.orange())
     e.set_author(
         name="bot", icon_url="https://prod.cloud.rockstargames.com/crews/sc/6874/23970745/publish/emblem/emblem_256.png")
     e.set_thumbnail(url="https://i.redd.it/34dnz2hvprl81.jpg")
-    e.add_field(name=f":sunglasses:**Nincs órája**",
-                value=f"** {'**, **'.join(z)}**", inline=False)
-    e.add_field(name=f":face_with_raised_eyebrow:**Egy órán belül lesz órája**",
-                value=f" {', '.join(s)}", inline=False)
-    e.add_field(name=f":face_vomiting:**Órája van**",
-                value=f"{', '.join(p)}", inline=False)
+    if len(z) > 0:
+        e.add_field(name=f":sunglasses:**Nincs órája**",
+                    value=f"**{', '.join(z)}**", inline=False)
+    if len(s) > 0:
+        e.add_field(name=f":face_with_raised_eyebrow:**Egy órán belül lesz órája**",
+                    value=f"{', '.join(s)}", inline=False)
+    if len(p) > 0:
+        e.add_field(name=f":face_vomiting:**Órája van**",
+                    value=f"{', '.join(p)}", inline=False)
 
-    e.set_footer(text="faszom")
+    e.set_footer(text="többiekről nem tudok")
     await ctx.send(embed=e)
 
 with open("token.txt") as f:
