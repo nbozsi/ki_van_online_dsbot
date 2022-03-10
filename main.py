@@ -1,14 +1,15 @@
 import requests
 import discord
 from discord.ext import commands
+from discord.utils import get
 import requests
 import shutil
 from txt_dictbe import txt2dict
 import os
 dirname = os.path.dirname(__file__)
-# import <erik része>
 
-bot = commands.Bot(command_prefix='$')
+intents = discord.Intents().all()
+bot = commands.Bot(command_prefix='$', intents=intents)
 
 
 @bot.event
@@ -40,6 +41,8 @@ async def adjhozza(ctx):
 
 @bot.command()
 async def szabad(ctx):
+    for member in ctx.guild.members:
+        print(member)
     z, s, p = (["Erik", "Boldi"], ["Broga", "VeresG"], ["sanyimester"])
     e = discord.Embed(
         title="Mi a fasz van",
