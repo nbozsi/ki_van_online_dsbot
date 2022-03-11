@@ -1,6 +1,9 @@
 import re
 import json
 import datetime
+import os
+
+dirname = os.path.dirname(__file__)
 
 
 def txt2dict(file_nev, nev, json_paros="paros_het.json", json_paratlan="paratlan_het.json"):
@@ -8,9 +11,9 @@ def txt2dict(file_nev, nev, json_paros="paros_het.json", json_paratlan="paratlan
         egesz = file.read()
     sorok = egesz.split("\n")
 
-    with open(json_paros, 'r') as f:  # json beolvasása d_paros-ba
+    with open(os.path.join(dirname, json_paros), 'r') as f:  # json beolvasása d_paros-ba
         d_paros = json.load(f)
-    with open(json_paratlan, 'r') as f:  # json beolvasás d_paratlan-ba
+    with open(os.path.join(dirname, json_paratlan), 'r') as f:  # json beolvasás d_paratlan-ba
         d_paratlan = json.load(f)
     # sorok=file.readlines()
     # d={Boldi:{  Hetfo:  {(480,600) ,  (720,840)}  , Kedd:{(vmi,vmi),(vmi,vmi)} } ,  Erik:{ Hetfo:  ((vmi,vmi),(vmi,vmi)) , Kedd: ((vmi,vmi)...)}  }
@@ -69,8 +72,3 @@ def kategoriak(tagok, json_paros="paros_het.json", json_paratlan="paratlan_het.j
             elif (not foglalt) and (not oraja_lesz):
                 z.append(tag.name)
     return (z, s, p)
-
-
-if __name__ == "__main__":  # ez csak akkor fut ha önmagában ezt a scriptet futtatod, ha a másik hívja meg, akkor nem
-    kategoriak("stf")
-    # txt2dict("nbozsi4#2098.txt", "nbozsi4#2098")
