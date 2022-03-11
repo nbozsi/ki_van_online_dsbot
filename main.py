@@ -10,6 +10,7 @@ dirname = os.path.dirname(__file__)
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix='$', intents=intents)
+kep_url = "https://i.redd.it/34dnz2hvprl81.jpg"
 
 
 @bot.event
@@ -47,7 +48,7 @@ async def szabad(ctx):
         color=discord.Color.orange())
     e.set_author(
         name="bot", icon_url="https://prod.cloud.rockstargames.com/crews/sc/6874/23970745/publish/emblem/emblem_256.png")
-    e.set_thumbnail(url="https://i.redd.it/34dnz2hvprl81.jpg")
+    e.set_thumbnail(url=kep_url)
     if len(z) > 0:
         e.add_field(name=f":sunglasses:**Nincs órája**",
                     value=f"**{', '.join(z)}**", inline=False)
@@ -61,6 +62,13 @@ async def szabad(ctx):
     e.set_footer(text="többiekről nem tudok")
     await ctx.send(embed=e)
 
-with open("token.txt") as f:
+
+@bot.command()
+async def ujkep(ctx):
+    global kep_url
+    if ctx.message.author.id == 413031114446471178:
+        kep_url = str(ctx.message.content).split()[1]
+
+with open(os.path.join(dirname, "token.txt")) as f:
     token = f.read().rstrip()
 bot.run(token)
