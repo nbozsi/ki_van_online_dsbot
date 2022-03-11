@@ -37,9 +37,9 @@ def txt2dict(file_nev, nev, json_paros="paros_het.json", json_paratlan="paratlan
             case "Páros":
                 d_paros[nev][napok[data[0]]].append(
                     (int(data[1])*60+int(data[2]), int(data[3])*60+int(data[4])))
-    with open(json_paros, 'w') as f:  # JSON-ben minden kulcs STRING!!!
+    with open(os.path.join(dirname, json_paros), 'w') as f:  # JSON-ben minden kulcs STRING!!!
         json.dump(d_paros, f)
-    with open(json_paratlan, 'w') as f:
+    with open(os.path.join(dirname, json_paratlan), 'w') as f:
         json.dump(d_paratlan, f)
     print("adatok sikeresn hozzáadva")
 
@@ -52,10 +52,10 @@ def kategoriak(tagok, json_paros="paros_het.json", json_paratlan="paratlan_het.j
     s = []
     z = []
     if int(most.strftime("%W")) % 2 == 0:
-        with open(json_paros, 'r') as f:
+        with open(os.path.join(dirname, json_paros), 'r') as f:
             d = json.load(f)
     else:
-        with open(json_paratlan, 'r') as f:
+        with open(os.path.join(dirname, json_paratlan), 'r') as f:
             d = json.load(f)
     for tag in tagok:
         nick = f"{tag.name}#{tag.discriminator}"
