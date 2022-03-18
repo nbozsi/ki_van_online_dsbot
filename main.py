@@ -21,6 +21,7 @@ async def on_ready():
 
 @bot.command()
 async def adjhozza(ctx):
+    """hozzáadja az órarendedet az adatbázishoz"""
     if len(ctx.message.attachments) == 0:
         await ctx.send("Nem csatoltál semmit")
         await ctx.message.add_reaction('❌')
@@ -42,6 +43,7 @@ async def adjhozza(ctx):
 
 @bot.command()
 async def szabad(ctx):
+    """megmondja kinek nincs épp órája"""
     z, s, p = kategoriak(ctx.guild.members)
     e = discord.Embed(
         title="Mi a fasz van",
@@ -63,7 +65,7 @@ async def szabad(ctx):
     await ctx.send(embed=e)
 
 
-@bot.command()
+@bot.command(hidden=True)
 async def ujkep(ctx):
     global kep_url
     if ctx.message.author.id == 413031114446471178:
