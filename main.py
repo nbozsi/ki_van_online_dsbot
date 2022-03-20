@@ -7,10 +7,10 @@ import shutil
 from txt_dictbe import txt2dict, kategoriak
 from os.path import dirname, abspath
 import os
+
 data_dirname = os.path.join(dirname(dirname(abspath(__file__))), 'data')
-print(data_dirname)
 intents = discord.Intents().all()
-bot = commands.Bot(command_prefix='$', intents=intents)
+bot = commands.Bot(command_prefix='$', intents=intents, help_command=None)
 kep_url = "https://i.redd.it/34dnz2hvprl81.jpg"
 
 
@@ -21,8 +21,25 @@ async def on_ready():
 
 
 @bot.command()
+async def help(ctx):
+    if ctx.message.content[6:] == "adjhozza":
+        await ctx.reply("https://streamable.com/sqcgqa")
+    else:
+        e = discord.Embed(
+            title="Commands",
+            color=discord.Color.blue())
+        e.set_author(
+            name="bot", icon_url="https://prod.cloud.rockstargames.com/crews/sc/6874/23970745/publish/emblem/emblem_256.png")
+        e.add_field(name=f"**{bot.command_prefix}szabad**",
+                    value="megmondja kinek nincs épp órája", inline=False)
+        e.add_field(name=f"**{bot.command_prefix}adjhozza**",
+                    value=f"hozzáadja az órarendedet az adatbázishoz, bővebben: `{bot.command_prefix}help adjhozza`", inline=False)
+        await ctx.send(embed=e)
+
+
+@bot.command()
 async def adjhozza(ctx):
-    """hozzáadja az órarendedet az adatbázishoz"""
+    """hozzáadja az órarendedet az adatbázishoz https://streamable.com/sqcgqa"""
     if len(ctx.message.attachments) == 0:
         await ctx.send("Nem csatoltál semmit")
         await ctx.message.add_reaction('❌')
