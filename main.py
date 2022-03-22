@@ -70,13 +70,13 @@ async def szabad(ctx):
         name="bot", icon_url="https://prod.cloud.rockstargames.com/crews/sc/6874/23970745/publish/emblem/emblem_256.png")
     e.set_thumbnail(url=kep_url)
     if len(z) > 0:
-        e.add_field(name=f":sunglasses:**Nincs órája**",
+        e.add_field(name=f":white_check_mark:**Nincs órája**",
                     value=f"**{', '.join(z)}**", inline=False)
     if len(s) > 0:
-        e.add_field(name=f":face_with_raised_eyebrow:**Egy órán belül lesz órája**",
+        e.add_field(name=f":warning:**Egy órán belül lesz órája**",
                     value=f"{', '.join(s)}", inline=False)
     if len(p) > 0:
-        e.add_field(name=f":face_vomiting:**Órája van**",
+        e.add_field(name=f":x:**Órája van**",
                     value=f"{', '.join(p)}", inline=False)
 
     e.set_footer(text="többiekről nem tudok")
