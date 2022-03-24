@@ -29,7 +29,7 @@ async def help(ctx):
             title="Commands",
             color=discord.Color.blue())
         e.set_author(
-            name="bot", icon_url="https://prod.cloud.rockstargames.com/crews/sc/6874/23970745/publish/emblem/emblem_256.png")
+            name="MizBot", icon_url="https://prod.cloud.rockstargames.com/crews/sc/6874/23970745/publish/emblem/emblem_256.png")
         e.add_field(name=f"**{bot.command_prefix}szabad**",
                     value="megmondja kinek nincs épp órája", inline=False)
         e.add_field(name=f"**{bot.command_prefix}adjhozza**",
@@ -67,7 +67,7 @@ async def szabad(ctx):
         title="Mi a fasz van",
         color=discord.Color.orange())
     e.set_author(
-        name="bot", icon_url="https://prod.cloud.rockstargames.com/crews/sc/6874/23970745/publish/emblem/emblem_256.png")
+        name="MizBot", icon_url="https://prod.cloud.rockstargames.com/crews/sc/6874/23970745/publish/emblem/emblem_256.png")
     e.set_thumbnail(url=kep_url)
     if len(z) > 0:
         e.add_field(name=f":white_check_mark:**Nincs órája**",
